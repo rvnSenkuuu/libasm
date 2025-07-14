@@ -1,0 +1,3 @@
+.objs
+*.a
+libasm_test
