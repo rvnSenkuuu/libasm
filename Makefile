@@ -6,11 +6,12 @@
 #    By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/14 15:29:14 by tkara2            #+#    #+#              #
-#    Updated: 2025/07/14 17:54:05 by tkara2           ###   ########.fr        #
+#    Updated: 2025/07/15 10:38:11 by tkara2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = srcs/ft_strlen.s
+SRCS = srcs/ft_strlen.s \
+		srcs/ft_strcmp.s
 
 OBJSDIR = .objs
 OBJS = $(patsubst %.s,$(OBJSDIR)/%.o,$(SRCS))
@@ -43,7 +44,8 @@ $(OBJSDIR)/%.o:	%.s
 $(OBJSDIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-test: $(TEST_NAME)
+test: $(NAME) $(TEST_NAME)
+	./$(TEST_NAME)
 
 $(TEST_NAME): $(TEST_OBJ) $(NAME)
 	$(CC) $(CFLAGS) $(TEST_OBJ) $(NAME) -o $@
