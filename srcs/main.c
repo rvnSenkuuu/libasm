@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:29:18 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/15 16:09:10 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/16 17:49:33 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	test_ft_strlen(void)
 			fprintf(stdout, "TEST FAILED\n");
 		else
 			fprintf(stdout, "TEST SUCCESS\n");
-
 		write(STDOUT_FILENO, "\n", sizeof(char));
 	}
 }
@@ -71,6 +70,40 @@ void	test_ft_strcmp(void)
 			fprintf(stdout, "TEST SUCCESS\n");
 		else
 			fprintf(stdout, "TEST FAILED\n");
+		write(STDOUT_FILENO, "\n", sizeof(char));
+	}
+}
+
+void	test_ft_strcpy(void)
+{
+	fprintf(stdout, "=====FT_STRCPY=====\n");
+	const char	*src[FT_STR_TEST_CASE] = {
+		"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+		"ccccccccccccccccccccccccc",
+		"dddddddddddddddd",
+		"eeeeeeeeeee",
+		"fffff",
+		"g"
+	};
+	char	ft_dest[1024] = {0};
+	char	libc_dest[1024] = {0};
+
+	for (int i = 0; i < FT_STR_TEST_CASE; i++) {
+		fprintf(stdout, "-----Testing Case %d-----\n", i);
+		fprintf(stdout, "Src = %s\n", src[i]);
+
+		ft_strcpy(ft_dest, src[i]);
+		strcpy(libc_dest, src[i]);
+
+		fprintf(stdout, "Ft_Dest = %s\n", ft_dest);
+		fprintf(stdout, "Libc_Dest = %s\n", libc_dest);
+
+		if (strncmp(ft_dest, libc_dest, strlen(src[i])) == 0)
+			fprintf(stdout, "TEST SUCCESS\n");
+		else
+			fprintf(stdout, "TEST FAILED\n");
+		write(STDOUT_FILENO, "\n", sizeof(char));
 	}
 }
 
@@ -78,5 +111,6 @@ int	main(void)
 {
 	test_ft_strlen();
 	test_ft_strcmp();
+	test_ft_strcpy();
 	return 0;
 }
