@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:35:40 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/16 14:15:12 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/17 12:07:36 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 extern int	ft_strcmp(const char *s1, const char *s2);
 extern size_t	ft_strlen(const char *s);
 extern char	*ft_strcpy(char *dest, const char *src);
+extern char	*ft_strdup(const char *s);
 
 #endif

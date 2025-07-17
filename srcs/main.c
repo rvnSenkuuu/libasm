@@ -6,24 +6,25 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:29:18 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/16 17:49:33 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/17 16:13:02 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
+const char	*str[FT_STR_TEST_CASE] = {
+	"62e836796jkshjhgvhjr343shvkjshjkhkjshbajkgjh43433bvjhbvj9337278",
+	"!&($^!$!^$jherjherjvhkjhv{}{}?>::>:)",
+	"2121ccccc      whvv27286rhvjehvg",
+	"    }{|}{|%&^%^%}      ",
+	"56176365",
+	"__ejgehg",
+	"42"
+};
+
 void	test_ft_strlen(void)
 {
 	fprintf(stdout, "=====FT_STRLEN=====\n");
-	const char	*str[FT_STR_TEST_CASE] = {
-		"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-		"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-		"ccccccccccccccccccccccccc",
-		"dddddddddddddddd",
-		"eeeeeeeeeee",
-		"fffff",
-		"g"
-	};
 
 	for (int i = 0; i < FT_STR_TEST_CASE; i++) {
 		size_t	ft_res = ft_strlen(str[i]);
@@ -44,15 +45,6 @@ void	test_ft_strlen(void)
 void	test_ft_strcmp(void)
 {
 	fprintf(stdout, "=====FT_STRCMP=====\n");
-	const char	*str[FT_STR_TEST_CASE] = {
-		"ABCDEF",
-		"1BCDE",
-		"+BCDEF",
-		"aBCDE",
-		" BCDEF",
-		"{BCDEF",
-		":BCD"
-	};
 
 	srand(time(NULL));
 	for (int i = 0; i < FT_STR_TEST_CASE; i++) {
@@ -77,33 +69,50 @@ void	test_ft_strcmp(void)
 void	test_ft_strcpy(void)
 {
 	fprintf(stdout, "=====FT_STRCPY=====\n");
-	const char	*src[FT_STR_TEST_CASE] = {
-		"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-		"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-		"ccccccccccccccccccccccccc",
-		"dddddddddddddddd",
-		"eeeeeeeeeee",
-		"fffff",
-		"g"
-	};
-	char	ft_dest[1024] = {0};
-	char	libc_dest[1024] = {0};
+	char	ft_dest[256] = {0};
+	char	libc_dest[256] = {0};
 
 	for (int i = 0; i < FT_STR_TEST_CASE; i++) {
 		fprintf(stdout, "-----Testing Case %d-----\n", i);
-		fprintf(stdout, "Src = %s\n", src[i]);
+		fprintf(stdout, "Src = %s\n", str[i]);
 
-		ft_strcpy(ft_dest, src[i]);
-		strcpy(libc_dest, src[i]);
+		ft_strcpy(ft_dest, str[i]);
+		strcpy(libc_dest, str[i]);
 
 		fprintf(stdout, "Ft_Dest = %s\n", ft_dest);
 		fprintf(stdout, "Libc_Dest = %s\n", libc_dest);
 
-		if (strncmp(ft_dest, libc_dest, strlen(src[i])) == 0)
+		if (strncmp(ft_dest, libc_dest, strlen(str[i])) == 0)
 			fprintf(stdout, "TEST SUCCESS\n");
 		else
 			fprintf(stdout, "TEST FAILED\n");
 		write(STDOUT_FILENO, "\n", sizeof(char));
+	}
+}
+
+void	test_ft_strdup(void)
+{
+	fprintf(stdout, "=====FT_STRDUP=====\n");
+	char	*ft_dest;
+	char	*libc_dest;
+
+	for (int i = 0; i < FT_STR_TEST_CASE; i++) {
+		fprintf(stdout, "-----Testing Case %d-----\n", i);
+		fprintf(stdout, "Src[%p] = %s\n", str[i], str[i]);
+
+		ft_dest = ft_strdup(str[i]);
+		libc_dest = strdup(str[i]);
+
+		fprintf(stdout, "Ft_Dest[%p] = %s\n", ft_dest, ft_dest);
+		fprintf(stdout, "Libc_Dest[%p] = %s\n", libc_dest, libc_dest);
+		
+		if (strncmp(ft_dest, libc_dest, strlen(str[i])) == 0)
+			fprintf(stdout, "TEST SUCCESS\n");
+		else
+			fprintf(stdout, "TEST FAILED\n");
+		write(STDOUT_FILENO, "\n", sizeof(char));
+		free(ft_dest);
+		free(libc_dest);
 	}
 }
 
@@ -112,5 +121,6 @@ int	main(void)
 	test_ft_strlen();
 	test_ft_strcmp();
 	test_ft_strcpy();
+	test_ft_strdup();
 	return 0;
 }
