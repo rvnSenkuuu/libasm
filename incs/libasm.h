@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:35:40 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/18 12:20:27 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/18 14:21:27 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,12 @@ extern ssize_t	ft_write(int fd, const void *buf, size_t count);
 extern ssize_t	ft_read(int fd, void *buf, size_t count);
 extern char	*ft_strcpy(char *dest, const char *src);
 extern char	*ft_strdup(const char *s);
+
+void	test_ft_strlen(void);
+void	test_ft_strcmp(void);
+void	test_ft_strcpy(void);
+void	test_ft_strdup(void);
+void	test_ft_write(void);
+void	test_ft_read(void);
 
 #endif

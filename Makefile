@@ -6,7 +6,7 @@
 #    By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/14 15:29:14 by tkara2            #+#    #+#              #
-#    Updated: 2025/07/18 11:47:02 by tkara2           ###   ########.fr        #
+#    Updated: 2025/07/18 14:56:46 by tkara2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ NASM_FLAGS = -felf64
 AR = ar rcs
 RM = rm -rf
 
-TEST_FILE = srcs/main.c
+TEST_FILE = srcs/main.c \
+			srcs/test_mandatory.c
 
 TEST_OBJ = $(addprefix $(OBJSDIR)/,$(TEST_FILE:.c=.o))
 
