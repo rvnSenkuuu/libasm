@@ -6,14 +6,15 @@
 #    By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/14 15:29:14 by tkara2            #+#    #+#              #
-#    Updated: 2025/07/17 11:51:38 by tkara2           ###   ########.fr        #
+#    Updated: 2025/07/18 10:13:57 by tkara2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = srcs/ft_strlen.s \
 		srcs/ft_strcmp.s \
 		srcs/ft_strcpy.s \
-		srcs/ft_strdup.s
+		srcs/ft_strdup.s \
+		srcs/ft_write.s
 
 OBJSDIR = .objs
 OBJS = $(patsubst %.s,$(OBJSDIR)/%.o,$(SRCS))
