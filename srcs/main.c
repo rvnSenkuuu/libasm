@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:29:18 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/18 11:37:55 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/18 12:24:36 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,55 @@ void	test_ft_write(void)
 	fprintf(stdout, "Sys_write = %s (%d)\n", strerror(errno), errno);
 }
 
+void	test_ft_read(void)
+{
+	fprintf(stdout, "=====FT_READ=====\n");
+	int	read_byte = 1;
+	char	buffer[BUFFER_SIZE] = {0};
+	const char	*file = "Makefile";
+
+	int	fd = open(file, O_RDONLY);
+	if (fd < 0) {
+		perror("Open");
+		return;
+	} 
+	while (read_byte != 0) {
+		read_byte = read(fd, buffer, BUFFER_SIZE);
+		if (read_byte < 0) {
+			perror("Sys_Read");
+			return;
+		}
+	}
+	fprintf(stdout, "Sys_read\n%s\n", buffer);
+
+	lseek(fd, 0, SEEK_SET);
+	memset(buffer, 0, BUFFER_SIZE);
+	read_byte = 1;
+	while (read_byte != 0) {
+		read_byte = ft_read(fd, buffer, BUFFER_SIZE);
+		if (read_byte < 0) {
+			perror("Ft_read");
+			return;
+		}
+	}
+	fprintf(stdout, "\nFt_read\n%s\n", buffer);
+	close(fd);
+
+	fprintf(stdout, "\nErrno Check\n");
+	char	err_buffer[BUFFER_SIZE] = {0};
+	const char	*dir = "srcs";
+	int	err_fd = open(dir, O_RDONLY);
+	if (err_fd < 0) {
+		perror("Open");
+		return;
+	}
+	int ft_res = ft_read(err_fd, err_buffer, BUFFER_SIZE);
+	fprintf(stdout, "Ft_read = %s (%d) return value = %d\n", strerror(errno), errno, ft_res);
+	int sys_ret = read(err_fd, err_buffer, BUFFER_SIZE);
+	fprintf(stdout, "Sys_read = %s (%d) return value = %d\n", strerror(errno), errno, sys_ret);
+	close(err_fd);
+}
+
 int	main(void)
 {
 	test_ft_strlen();
@@ -145,5 +194,6 @@ int	main(void)
 	test_ft_strcpy();
 	test_ft_strdup();
 	test_ft_write();
+	test_ft_read();
 	return 0;
 }

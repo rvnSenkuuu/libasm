@@ -1,6 +1,6 @@
 global ft_strcpy
-section .text
 
+section .text
 ft_strcpy:
 	xor rax, rax
 	xor rcx, rcx

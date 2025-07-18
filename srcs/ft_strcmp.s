@@ -1,6 +1,6 @@
 global ft_strcmp
-section .text
 
+section .text
 ft_strcmp:
 	xor rax, rax
 	xor rcx, rcx

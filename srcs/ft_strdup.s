@@ -1,10 +1,9 @@
 global ft_strdup
-section .text
-
 extern malloc
 extern ft_strlen
 extern ft_strcpy
 
+section .text
 ft_strdup:
 	push rdi
 

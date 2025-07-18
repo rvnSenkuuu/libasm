@@ -1,15 +1,15 @@
-global ft_write
+global ft_read
 extern __errno_location
 
 section .text
-ft_write:
-	mov rax, 1
+ft_read:
+	mov rax, 0
 	syscall
 	test rax, rax
-	js .write_fail
+	js .read_fail
 	ret
 
-.write_fail:
+.read_fail:
 	neg rax
 	mov r8, rax
 	call __errno_location

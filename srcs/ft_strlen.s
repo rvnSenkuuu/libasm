@@ -1,6 +1,6 @@
 global ft_strlen
-section .text
 
+section .text
 ft_strlen:
 	xor rax, rax ;set rax to 0
 
