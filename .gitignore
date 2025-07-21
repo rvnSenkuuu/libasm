@@ -1,3 +1,4 @@
 .objs
+.vscode
 *.a
 libasm_test
