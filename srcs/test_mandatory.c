@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 14:19:52 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/18 14:20:30 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/18 15:13:58 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void	test_ft_write(void)
 	fprintf(stdout, "Ft_write = %s (%d)\n", strerror(errno), errno);
 	write(42, str[1], strlen(str[1]));
 	fprintf(stdout, "Sys_write = %s (%d)\n", strerror(errno), errno);
+	write(STDOUT_FILENO, "\n", sizeof(char));
 }
 
 void	test_ft_read(void)
@@ -185,4 +186,5 @@ void	test_ft_read(void)
 	int sys_ret = read(err_fd, err_buffer, BUFFER_SIZE);
 	fprintf(stdout, "Sys_read = %s (%d) return value = %d\n", strerror(errno), errno, sys_ret);
 	close(err_fd);
+	write(STDOUT_FILENO, "\n", sizeof(char));
 }
