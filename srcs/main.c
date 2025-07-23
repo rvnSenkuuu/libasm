@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:29:18 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/23 15:22:38 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/23 18:28:32 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ int	main(void)
 {
 	char	buffer[2] = {0};
 
-	if (ft_atoi_base("1", "123456789ABCDEF") == 0) {
+	int res = ft_atoi_base("-51", "0123456789");
+	if (res == 0) {
 		fprintf(stdout, "FT_ATOI_BASE RETURN 0\n");
 		return 0;
 	}
 	else {
-		fprintf(stdout, "FT_ATOI_BASE TEST\n");
+		fprintf(stdout, "FT_ATOI_BASE TEST: %d\n", res);
 		return 0;
 	}
 
