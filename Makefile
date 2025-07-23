@@ -6,7 +6,7 @@
 #    By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/14 15:29:14 by tkara2            #+#    #+#              #
-#    Updated: 2025/07/18 15:14:13 by tkara2           ###   ########.fr        #
+#    Updated: 2025/07/21 11:40:14 by tkara2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRCS = srcs/ft_strlen.s \
 		srcs/ft_strcpy.s \
 		srcs/ft_strdup.s \
 		srcs/ft_write.s \
-		srcs/ft_read.s
+		srcs/ft_read.s \
+		srcs/ft_atoi_base_bonus.s
 
 OBJSDIR = .objs
 OBJS = $(patsubst %.s,$(OBJSDIR)/%.o,$(SRCS))
@@ -35,7 +36,7 @@ TEST_OBJ = $(addprefix $(OBJSDIR)/,$(TEST_FILE:.c=.o))
 
 TEST_NAME = libasm_test
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iincs
+CFLAGS = -Wall -Werror -Wextra -Iincs -MMD -MP
 
 all: $(NAME)
 
@@ -48,6 +49,8 @@ $(OBJSDIR)/%.o:	%.s
 
 $(OBJSDIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+bonus: all
 
 test: $(NAME) $(TEST_NAME)
 	./$(TEST_NAME)
@@ -64,4 +67,6 @@ fclean: clean
 re: fclean
 	$(MAKE) all
 
-.PHONY: all test clean fclean re
+-include $(OBJS:.o=.d)
+
+.PHONY: all bonus test clean fclean re
