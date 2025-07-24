@@ -1,6 +1,4 @@
 global ft_atoi_base
-; int	ft_atoi_base(char *str, char *base);
-; rax	ft_atoi_base(rdi, rsi);
 
 section .text
 check_base:
@@ -8,7 +6,7 @@ check_base:
 	push rdx
 	xor rcx, rcx
 
-.outer_loop:
+.outer_loop: ; check if base[i] == '-' '+' white space
 	mov al, byte [rdi + rcx]
 	test al, al
 	je .check_base_ret
@@ -29,13 +27,12 @@ check_base:
 	cmp al, 32
 	je .check_base_ret_zero
 
-	mov bl, al
 	mov rdx, rcx
 	inc rdx
 
-.inner_loop:
-	mov al, [rdi + rdx]
-	test al, al
+.inner_loop: ; nested loop for checking duplicate characters in base
+	mov bl, [rdi + rdx]
+	test bl, bl
 	je .inner_loop_end
 	cmp al, bl
 	je .check_base_ret_zero
@@ -55,14 +52,14 @@ check_base:
 .check_base_ret:
 	pop rdx
 	pop rbx
-	mov rax, rcx
+	mov rax, rcx ; return the length of the base
 	ret
 
 ft_atoi_base:
-	mov r11, rdi
-	mov rdi, rsi
+	mov r11, rdi ; saving rdi which is str into a temporary register
+	mov rdi, rsi ; since rdi will be overwritten
 	call check_base
-	cmp rax, 2
+	cmp rax, 2 ; check if the base length is valid (at least 2 characters)
 	jl .ft_atoi_base_ret_zero
 	mov rdi, r11
 
@@ -71,7 +68,7 @@ ft_atoi_base:
 	xor r10, r10 ; result register moved to rax at the end
 	mov rbx, 1 ; sign register
 
-.skip_space:
+.skip_space: ; skip whitespace characters.
 	mov al, [rdi + rcx]
 	cmp al, 9
 	je .inc_skip_space
@@ -91,7 +88,7 @@ ft_atoi_base:
 	inc rcx
 	jmp .skip_space
 
-.check_sign:
+.check_sign: ; check for sign characters (+ or -)
 	mov al, [rdi + rcx]
 	cmp al, 43
 	je .sign_plus
@@ -116,7 +113,7 @@ ft_atoi_base:
 	xor r9, r9
 	mov al, [rdi + rcx]
 
-.in_base_loop:
+.in_base_loop: ; use r9 register as index to find the position in the base
 	cmp byte [rsi + r9], 0
 	je .ft_atoi_base_ret
 	mov dl, [rsi + r9]
@@ -125,7 +122,7 @@ ft_atoi_base:
 	inc r9
 	jmp .in_base_loop
 
-.compute_res:
+.compute_res: ; res = res * base_len + position in the base
 	imul r10, r8
 	add r10, r9
 	inc rcx
@@ -135,7 +132,7 @@ ft_atoi_base:
 	xor rax, rax
 	ret
 
-.ft_atoi_base_ret:
+.ft_atoi_base_ret: ; return res * sign
 	imul r10, rbx
 	mov rax, r10
 	ret
