@@ -6,7 +6,7 @@
 #    By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/14 15:29:14 by tkara2            #+#    #+#              #
-#    Updated: 2025/07/24 11:00:17 by tkara2           ###   ########.fr        #
+#    Updated: 2025/07/24 17:07:04 by tkara2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS = srcs/ft_strlen.s \
 		srcs/ft_strdup.s \
 		srcs/ft_write.s \
 		srcs/ft_read.s \
-		srcs/ft_atoi_base_bonus.s
+		srcs/ft_atoi_base_bonus.s \
+		srcs/ft_list_size_bonus.s
 
 OBJSDIR = .objs
 OBJS = $(patsubst %.s,$(OBJSDIR)/%.o,$(SRCS))
@@ -25,7 +26,7 @@ INCS = ./incs/libasm.h
 
 NAME = libasm.a
 NASM = nasm
-NASM_FLAGS = -felf64
+NASM_FLAGS = -felf64 -I incs/
 AR = ar rcs
 RM = rm -rf
 

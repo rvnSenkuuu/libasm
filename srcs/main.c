@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:29:18 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/24 10:55:26 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/24 16:58:51 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(void)
 		fprintf(stdout, "5- ft_write\n");
 		fprintf(stdout, "6- ft_read\n");
 		fprintf(stdout, "7- ft_atoi_base\n");
+		fprintf(stdout, "8- ft_list_size\n");
 		write(STDOUT_FILENO, ">", sizeof(char));
 		scanf("%2s", buffer);
 
@@ -50,6 +51,9 @@ int	main(void)
 				break;
 			case 7:
 				test_ft_atoi_base();
+				break;
+			case 8:
+				test_ft_list_size();
 				break;
 			default:
 				fprintf(stdout, "Invalid input\n");
