@@ -4,6 +4,8 @@ global ft_atoi_base
 
 section .text
 check_base:
+	push rbx
+	push rdx
 	xor rcx, rcx
 
 .outer_loop:
@@ -45,21 +47,24 @@ check_base:
 	jmp .outer_loop
 
 .check_base_ret_zero:
+	pop rdx
+	pop rbx
 	xor rax, rax
 	ret
 
 .check_base_ret:
+	pop rdx
+	pop rbx
 	mov rax, rcx
 	ret
 
 ft_atoi_base:
-	push rdi
-
+	mov r11, rdi
 	mov rdi, rsi
 	call check_base
 	cmp rax, 2
 	jl .ft_atoi_base_ret_zero
-	pop rdi
+	mov rdi, r11
 
 	mov r8, rax ; base length given by check_base function
 	xor rcx, rcx ; index counter register

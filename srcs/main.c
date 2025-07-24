@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:29:18 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/23 18:28:32 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/24 10:55:26 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,6 @@ int	main(void)
 {
 	char	buffer[2] = {0};
 
-	int res = ft_atoi_base("-51", "0123456789");
-	if (res == 0) {
-		fprintf(stdout, "FT_ATOI_BASE RETURN 0\n");
-		return 0;
-	}
-	else {
-		fprintf(stdout, "FT_ATOI_BASE TEST: %d\n", res);
-		return 0;
-	}
-
 	while (1) {
 		fprintf(stdout, "Available function are: \n");
 		fprintf(stdout, "1- ft_strlen \n");
@@ -34,6 +24,7 @@ int	main(void)
 		fprintf(stdout, "4- ft_strdup\n");
 		fprintf(stdout, "5- ft_write\n");
 		fprintf(stdout, "6- ft_read\n");
+		fprintf(stdout, "7- ft_atoi_base\n");
 		write(STDOUT_FILENO, ">", sizeof(char));
 		scanf("%2s", buffer);
 
@@ -56,6 +47,9 @@ int	main(void)
 				break;
 			case 6:
 				test_ft_read();
+				break;
+			case 7:
+				test_ft_atoi_base();
 				break;
 			default:
 				fprintf(stdout, "Invalid input\n");

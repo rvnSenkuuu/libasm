@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:35:40 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/21 14:17:14 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/24 11:48:10 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <errno.h>
 # include <time.h>
 # include <fcntl.h>
+# include <limits.h>
 
 # define FT_STR_TEST_CASE 7
 # define BUFFER_SIZE 2048
@@ -39,5 +40,16 @@ void	test_ft_strcpy(void);
 void	test_ft_strdup(void);
 void	test_ft_write(void);
 void	test_ft_read(void);
+void	test_ft_atoi_base(void);
+
+#define ATOI_BASE_ASSERT(str, base, expected, test_number) do {                  \
+	fprintf(stdout, "\n-----Testing Case %d-----\n", test_number);               \
+	int	res = ft_atoi_base(str, base);                                           \
+	fprintf(stdout, "Ft_atoi_base result = %d\nExpected = %d\n", res, expected); \
+	if (res == expected)                                                         \
+		fprintf(stdout, "TEST SUCCESS\n");                                       \
+	else                                                                         \
+		fprintf(stdout, "TEST FAILED\n");                                        \
+} while (0)
 
 #endif

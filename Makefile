@@ -6,7 +6,7 @@
 #    By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/14 15:29:14 by tkara2            #+#    #+#              #
-#    Updated: 2025/07/21 11:40:14 by tkara2           ###   ########.fr        #
+#    Updated: 2025/07/24 11:00:17 by tkara2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,14 @@ AR = ar rcs
 RM = rm -rf
 
 TEST_FILE = srcs/main.c \
-			srcs/test_mandatory.c
+			srcs/test_mandatory.c \
+			srcs/test_bonus.c
 
 TEST_OBJ = $(addprefix $(OBJSDIR)/,$(TEST_FILE:.c=.o))
 
 TEST_NAME = libasm_test
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iincs -MMD -MP
+CFLAGS = -Wall -Werror -Wextra -Iincs -MMD -MP -g3
 
 all: $(NAME)
 
