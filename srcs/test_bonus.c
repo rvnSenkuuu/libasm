@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:38:03 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/25 13:35:54 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/25 17:30:22 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,16 @@ void	test_ft_list_size(void)
 {
 	fprintf(stdout, "=====FT_LIST_SIZE=====\n");
 	
-	t_list	*node = malloc(1 * sizeof(*node));
-	t_list	*node1 = malloc(1 * sizeof(*node));
-	t_list	*node2 = malloc(1 * sizeof(*node));
-	t_list	*node3 = malloc(1 * sizeof(*node));
+	t_list	node, node1, node2, node3;
 
-	node->next = node1;
-	node1->next = node2;
-	node2->next = node3;
+	node.next = &node1;
+	node1.next = &node2;
+	node2.next = &node3;
 
-	LIST_SIZE_ASSERT(node, 4, 1);
-	LIST_SIZE_ASSERT(node2, 2, 2);
-	LIST_SIZE_ASSERT(node3, 1, 3);
+	LIST_SIZE_ASSERT(&node, 4, 1);
+	LIST_SIZE_ASSERT(&node2, 2, 2);
+	LIST_SIZE_ASSERT(&node3, 1, 3);
 	write(STDOUT_FILENO, "\n", sizeof(char));
-
-	free(node3);
-	free(node2);
-	free(node1);
-	free(node);
 }
 
 static void	print_list(t_list *list)
@@ -67,29 +59,44 @@ void	test_ft_list_push_front(void)
 	fprintf(stdout, "=====FT_LIST_PUSH_FRONT=====\n");
 
 	t_list	*list = NULL;
-	
-	t_list	*node = malloc(sizeof(*node));
-	node->data = "aaaaaa";
+	t_list	node, node1, node2, node3;
 
-	t_list	*node1 = malloc(sizeof(*node1));
-	node1->data = "bbbbbbbb";
+	node.data = "aaaaaa";
+	node1.data = "bbbbbbbb";
+	node2.data = "cccccccccc";
+	node3.data = "ddddddddddddd";
 
-	t_list	*node2 = malloc(sizeof(*node2));
-	node2->data = "cccccccccc";
-
-	t_list	*node3 = malloc(sizeof(*node3));
-	node3->data = "ddddddddddddd";
-
-	ft_list_push_front(&list, node);
-	ft_list_push_front(&list, node1);
-	ft_list_push_front(&list, node3);
-	ft_list_push_front(&list, node2);
+	ft_list_push_front(&list, &node);
+	ft_list_push_front(&list, &node1);
+	ft_list_push_front(&list, &node3);
+	ft_list_push_front(&list, &node2);
 
 	print_list(list);
 	write(STDOUT_FILENO, "\n", sizeof(char));
+}
 
-	free(node3);
-	free(node2);
-	free(node1);
-	free(node);
+void	test_ft_list_sort(void)
+{
+	fprintf(stdout, "=====FT_LIST_SORT=====\n");
+
+	t_list	*list = NULL;
+	t_list	node, node1, node2, node3;
+
+	node.data = "aaaaa";
+	node1.data = "bbbbb";
+	node2.data = "ccccc";
+	node3.data = "ddddd";
+
+	ft_list_push_front(&list, &node);
+	ft_list_push_front(&list, &node1);
+	ft_list_push_front(&list, &node2);
+	ft_list_push_front(&list, &node3);
+
+	fprintf(stdout, "List before sort: \n");
+	print_list(list);
+	write(STDOUT_FILENO, "\n", sizeof(char));
+	fprintf(stdout, "List after sort: \n");
+	ft_list_sort(&list, strcmp);
+	print_list(list);
+	write(STDOUT_FILENO, "\n", sizeof(char));
 }

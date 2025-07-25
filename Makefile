@@ -6,7 +6,7 @@
 #    By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/14 15:29:14 by tkara2            #+#    #+#              #
-#    Updated: 2025/07/25 10:40:35 by tkara2           ###   ########.fr        #
+#    Updated: 2025/07/25 17:27:01 by tkara2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRCS = srcs/ft_strlen.s \
 		srcs/ft_read.s \
 		srcs/ft_atoi_base_bonus.s \
 		srcs/ft_list_size_bonus.s \
-		srcs/ft_list_push_front_bonus.s
+		srcs/ft_list_push_front_bonus.s \
+		srcs/ft_list_sort_bonus.s
 
 OBJSDIR = .objs
 OBJS = $(patsubst %.s,$(OBJSDIR)/%.o,$(SRCS))
