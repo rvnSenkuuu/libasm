@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:38:03 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/24 17:49:14 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/25 13:35:54 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,47 @@ void	test_ft_list_size(void)
 	LIST_SIZE_ASSERT(node, 4, 1);
 	LIST_SIZE_ASSERT(node2, 2, 2);
 	LIST_SIZE_ASSERT(node3, 1, 3);
+	write(STDOUT_FILENO, "\n", sizeof(char));
+
+	free(node3);
+	free(node2);
+	free(node1);
+	free(node);
+}
+
+static void	print_list(t_list *list)
+{
+	while (list) {
+		fprintf(stdout, "List data = %s\n", (char *)list->data);
+		list = list->next;
+	}
+}
+
+void	test_ft_list_push_front(void)
+{
+	fprintf(stdout, "=====FT_LIST_PUSH_FRONT=====\n");
+
+	t_list	*list = NULL;
+	
+	t_list	*node = malloc(sizeof(*node));
+	node->data = "aaaaaa";
+
+	t_list	*node1 = malloc(sizeof(*node1));
+	node1->data = "bbbbbbbb";
+
+	t_list	*node2 = malloc(sizeof(*node2));
+	node2->data = "cccccccccc";
+
+	t_list	*node3 = malloc(sizeof(*node3));
+	node3->data = "ddddddddddddd";
+
+	ft_list_push_front(&list, node);
+	ft_list_push_front(&list, node1);
+	ft_list_push_front(&list, node3);
+	ft_list_push_front(&list, node2);
+
+	print_list(list);
+	write(STDOUT_FILENO, "\n", sizeof(char));
 
 	free(node3);
 	free(node2);
