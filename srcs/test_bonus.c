@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:38:03 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/28 13:55:36 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/29 17:08:01 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	print_list(t_list *list)
 		fprintf(stdout, "List data = %s\n", (char *)list->data);
 		list = list->next;
 	}
+	write(STDOUT_FILENO, "\n", sizeof(char));
 }
 
 void	test_ft_list_push_front(void)
@@ -72,7 +73,6 @@ void	test_ft_list_push_front(void)
 	ft_list_push_front(&list, &node2);
 
 	print_list(list);
-	write(STDOUT_FILENO, "\n", sizeof(char));
 }
 
 void	test_ft_list_sort(void)
@@ -94,9 +94,92 @@ void	test_ft_list_sort(void)
 
 	fprintf(stdout, "List before sort: \n");
 	print_list(list);
-	write(STDOUT_FILENO, "\n", sizeof(char));
 	fprintf(stdout, "List after sort: \n");
 	ft_list_sort(&list, strcmp);
 	print_list(list);
-	write(STDOUT_FILENO, "\n", sizeof(char));
+}
+
+t_list	*create_list_str(char **strs, int size)
+{
+	t_list	*head = NULL;
+	for (int i = size - 1; i >= 0; i--) {
+		t_list	*node = malloc(sizeof(*node));
+		node->data = strdup(strs[i]);
+		node->next = head;
+		head = node;
+	}
+	return head;
+}
+
+void	free_list(t_list *list)
+{
+	t_list *tmp;
+	while (list) {
+		tmp = list;
+		list = list->next;
+		free(tmp->data);
+		free(tmp);
+	}
+}
+
+// void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *))
+// {
+// 	t_list	*cur;
+
+// 	if (begin_list == NULL || *begin_list == NULL)
+// 		return;
+
+// 	cur = *begin_list;
+// 	if (cmp(cur->data, data_ref) == 0) {
+// 		*begin_list = cur->next;
+// 		free_fct(cur);
+// 		ft_list_remove_if(begin_list, data_ref, cmp, free_fct);
+// 	}
+// 	else
+// 		ft_list_remove_if(&cur->next, data_ref, cmp, free_fct);
+// }
+
+void ft_list_remove_if(t_list **begin, void *data_ref, int (*cmp)(), void (*free_fct)(void *))
+{
+	t_list	*current;
+	t_list	*prev;
+	t_list	*tmp;
+
+	current = *begin;
+	while (current) {
+		if (cmp(current->data, data_ref) == 0) {
+			tmp = current;
+			if (!prev) {
+				*begin = current->next;
+				prev = current;
+			} else {
+				prev->next = current->next;
+				current = prev->next;
+			}
+			free_fct(tmp->data);
+			free(tmp);
+		}
+		prev = current;
+		current = current->next;
+	}
+}
+
+void	test_ft_list_remove_if(void)
+{
+	fprintf(stdout, "=====FT_LIST_REMOVE_IF=====\n");
+	
+	char	*strs[] = {"aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee"};
+	char	*to_remove = "ccccc";
+
+	t_list	*list = create_list_str(strs, 5);
+
+	fprintf(stdout, "List before remove_if:\n");
+	print_list(list);
+
+	ft_list_remove_if(&list, to_remove, strcmp, free);
+
+	fprintf(stdout, "List after remove_if:\n");
+	print_list(list);
+
+	free_list(list);
 }

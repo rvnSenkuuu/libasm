@@ -33,7 +33,7 @@ ft_list_sort:
 
 	mov rdi, [r12]
 	mov rsi, [r13]
-	call r14
+	call r14 ; (*cmp)(current_node->data, next_node->data) (rdi, rsi)
 	test eax, eax
 	jle .inc_node
 

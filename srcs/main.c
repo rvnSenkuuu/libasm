@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:29:18 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/25 15:36:37 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/28 13:58:23 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(void)
 		fprintf(stdout, "8- ft_list_size\n");
 		fprintf(stdout, "9- ft_list_push_front\n");
 		fprintf(stdout, "10- ft_list_sort\n");
+		fprintf(stdout, "11- ft_list_remove_if\n");
 		write(STDOUT_FILENO, ">", sizeof(char));
 		scanf("%2s", buffer);
 
@@ -62,6 +63,9 @@ int	main(void)
 				break;
 			case 10:
 				test_ft_list_sort();
+				break;
+			case 11:
+				test_ft_list_remove_if();
 				break;
 			default:
 				fprintf(stdout, "Invalid input\n");

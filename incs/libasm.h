@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:35:40 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/25 15:37:37 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/28 14:02:29 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ extern int	ft_atoi_base(char *str, char *base);
 extern int	ft_list_size(t_list *lst);
 extern void	ft_list_push_front(t_list **list, t_list *node);
 extern void	ft_list_sort(t_list **list, int (*cmp)());
+extern void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
 
 void	test_ft_strlen(void);
 void	test_ft_strcmp(void);
@@ -53,6 +54,7 @@ void	test_ft_atoi_base(void);
 void	test_ft_list_size(void);
 void	test_ft_list_push_front(void);
 void	test_ft_list_sort(void);
+void	test_ft_list_remove_if(void);
 
 #define ATOI_BASE_ASSERT(str, base, expected, test_number) do {                  \
 	fprintf(stdout, "\n-----Testing Case %d-----\n", test_number);               \
