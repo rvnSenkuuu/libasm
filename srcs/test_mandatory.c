@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 14:19:52 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/29 17:44:34 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/29 18:21:30 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,5 +193,5 @@ void	test_ft_read(void)
 
 	write(STDOUT_FILENO, ">", sizeof(char));
 	ft_read(0, tmp, 655);
-	fprintf(stdout, "Output: %s %d\n", tmp);
+	fprintf(stdout, "Output: %s\n", tmp);
 }

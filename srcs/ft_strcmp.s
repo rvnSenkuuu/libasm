@@ -16,7 +16,6 @@ ft_strcmp:
 	jmp .loop
 
 .sub_return:
-	movzx rax, al ;extend the register al to rax with zero extended the other bits
 	sub rax, rbx ;sub both character equal to return s1[i] - s2[i]
 	ret
 
