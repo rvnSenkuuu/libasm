@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 14:19:52 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/18 15:13:58 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/29 17:44:34 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ const char	*str[FT_STR_TEST_CASE] = {
 	"    }{|}{|%&^%^%}      ",
 	"56176365",
 	"__ejgehg",
-	"42"
+	""
 };
 
 void	test_ft_strlen(void)
@@ -187,4 +187,11 @@ void	test_ft_read(void)
 	fprintf(stdout, "Sys_read = %s (%d) return value = %d\n", strerror(errno), errno, sys_ret);
 	close(err_fd);
 	write(STDOUT_FILENO, "\n", sizeof(char));
+
+	fprintf(stdout, "===Testing STDIN===\n");
+	char	tmp[5] = {0};
+
+	write(STDOUT_FILENO, ">", sizeof(char));
+	ft_read(0, tmp, 655);
+	fprintf(stdout, "Output: %s %d\n", tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:38:03 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/29 17:08:01 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/29 17:23:44 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void	test_ft_list_remove_if(void)
 	fprintf(stdout, "List before remove_if:\n");
 	print_list(list);
 
-	ft_list_remove_if(&list, to_remove, strcmp, free);
+	ft_list_remove_if(&list, to_remove, ft_strcmp, free);
 
 	fprintf(stdout, "List after remove_if:\n");
 	print_list(list);
