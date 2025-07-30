@@ -6,7 +6,7 @@
 #    By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/14 15:29:14 by tkara2            #+#    #+#              #
-#    Updated: 2025/07/28 17:12:15 by tkara2           ###   ########.fr        #
+#    Updated: 2025/07/30 15:59:53 by tkara2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ RM = rm -rf
 
 TEST_FILE = srcs/main.c \
 			srcs/test_mandatory.c \
-			srcs/test_bonus.c
+			srcs/test_bonus.c \
+			srcs/test_utils.c
 
 TEST_OBJ = $(addprefix $(OBJSDIR)/,$(TEST_FILE:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:38:03 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/29 17:23:44 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/30 15:58:26 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,6 @@ void	test_ft_list_size(void)
 	write(STDOUT_FILENO, "\n", sizeof(char));
 }
 
-static void	print_list(t_list *list)
-{
-	while (list) {
-		fprintf(stdout, "List data = %s\n", (char *)list->data);
-		list = list->next;
-	}
-	write(STDOUT_FILENO, "\n", sizeof(char));
-}
-
 void	test_ft_list_push_front(void)
 {
 	fprintf(stdout, "=====FT_LIST_PUSH_FRONT=====\n");
@@ -72,7 +63,7 @@ void	test_ft_list_push_front(void)
 	ft_list_push_front(&list, &node3);
 	ft_list_push_front(&list, &node2);
 
-	print_list(list);
+	print_list(list, NULL, 0);
 }
 
 void	test_ft_list_sort(void)
@@ -92,76 +83,9 @@ void	test_ft_list_sort(void)
 	ft_list_push_front(&list, &node2);
 	ft_list_push_front(&list, &node3);
 
-	fprintf(stdout, "List before sort: \n");
-	print_list(list);
-	fprintf(stdout, "List after sort: \n");
+	print_list(list, "before", 's');
 	ft_list_sort(&list, strcmp);
-	print_list(list);
-}
-
-t_list	*create_list_str(char **strs, int size)
-{
-	t_list	*head = NULL;
-	for (int i = size - 1; i >= 0; i--) {
-		t_list	*node = malloc(sizeof(*node));
-		node->data = strdup(strs[i]);
-		node->next = head;
-		head = node;
-	}
-	return head;
-}
-
-void	free_list(t_list *list)
-{
-	t_list *tmp;
-	while (list) {
-		tmp = list;
-		list = list->next;
-		free(tmp->data);
-		free(tmp);
-	}
-}
-
-// void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *))
-// {
-// 	t_list	*cur;
-
-// 	if (begin_list == NULL || *begin_list == NULL)
-// 		return;
-
-// 	cur = *begin_list;
-// 	if (cmp(cur->data, data_ref) == 0) {
-// 		*begin_list = cur->next;
-// 		free_fct(cur);
-// 		ft_list_remove_if(begin_list, data_ref, cmp, free_fct);
-// 	}
-// 	else
-// 		ft_list_remove_if(&cur->next, data_ref, cmp, free_fct);
-// }
-
-void ft_list_remove_if(t_list **begin, void *data_ref, int (*cmp)(), void (*free_fct)(void *))
-{
-	t_list	*current;
-	t_list	*prev;
-	t_list	*tmp;
-
-	current = *begin;
-	while (current) {
-		if (cmp(current->data, data_ref) == 0) {
-			tmp = current;
-			if (!prev) {
-				*begin = current->next;
-				prev = current;
-			} else {
-				prev->next = current->next;
-				current = prev->next;
-			}
-			free_fct(tmp->data);
-			free(tmp);
-		}
-		prev = current;
-		current = current->next;
-	}
+	print_list(list, "after", 's');
 }
 
 void	test_ft_list_remove_if(void)
@@ -169,17 +93,52 @@ void	test_ft_list_remove_if(void)
 	fprintf(stdout, "=====FT_LIST_REMOVE_IF=====\n");
 	
 	char	*strs[] = {"aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee"};
-	char	*to_remove = "ccccc";
+	char	*to_remove_str = "bbbbb";
 
-	t_list	*list = create_list_str(strs, 5);
+	t_list	*list_str = create_list_str(strs, 5);
+	fprintf(stdout, "=====TEST 1=====\n");
+	fprintf(stdout, "Trying to remove : %s\n", to_remove_str);
+	print_list(list_str, "before", 's');
+	ft_list_remove_if(&list_str, to_remove_str, ft_strcmp, free);
+	print_list(list_str, "after", 's');
+	free_list(list_str);
 
-	fprintf(stdout, "List before remove_if:\n");
-	print_list(list);
+	t_list	*list_str1 = create_list_str(strs, 5);
+	char	*to_remove1_str = "xxxxx";
+	fprintf(stdout, "=====TEST 2=====\n");
+	fprintf(stdout, "Trying to remove : %s\n", to_remove1_str);
+	print_list(list_str1, "before", 's');
+	ft_list_remove_if(&list_str1, to_remove1_str, ft_strcmp, free);
+	print_list(list_str1, "after", 's');
+	free_list(list_str1);
 
-	ft_list_remove_if(&list, to_remove, ft_strcmp, free);
+	int	array[] = {1, 2, 3, 4, 5, 6};
+	t_list	*list_int = create_list_int(array, ARRAY_LEN(array));
+	int	to_remove_int = 1;
+	fprintf(stdout, "=====TEST 3=====\n");
+	fprintf(stdout, "Trying to remove : %d\n", to_remove_int);
+	print_list(list_int, "before", 'd');
+	ft_list_remove_if(&list_int, &to_remove_int, cmp_int, free);
+	print_list(list_int, "after", 'd');
+	free_list(list_int);
 
-	fprintf(stdout, "List after remove_if:\n");
-	print_list(list);
+	int	array1[] = {1, 2, 3, 4, 5, 6};
+	t_list	*list_int1 = create_list_int(array1, ARRAY_LEN(array1));
+	int	to_remove_int1 = 55;
+	fprintf(stdout, "=====TEST 4=====\n");
+	fprintf(stdout, "Trying to remove : %d\n", to_remove_int1);
+	print_list(list_int1, "before", 'd');
+	ft_list_remove_if(&list_int1, &to_remove_int1, cmp_int, free);
+	print_list(list_int1, "after", 'd');
+	free_list(list_int1);
 
-	free_list(list);
+	int	array2[] = {42, 42, 42, 42, 42, 42};
+	t_list	*list_int2 = create_list_int(array2, ARRAY_LEN(array2));
+	int	to_remove_int2 = 42;
+	fprintf(stdout, "=====TEST 5=====\n");
+	fprintf(stdout, "Trying to remove : %d\n", to_remove_int2);
+	print_list(list_int2, "before", 'd');
+	ft_list_remove_if(&list_int2, &to_remove_int2, cmp_int, free);
+	print_list(list_int2, "after", 'd');
+	free_list(list_int2);
 }

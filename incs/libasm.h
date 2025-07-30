@@ -6,24 +6,24 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:35:40 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/28 14:02:29 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/30 15:59:24 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBASM_H
 #define LIBASM_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <errno.h>
-# include <time.h>
-# include <fcntl.h>
-# include <limits.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <time.h>
+#include <fcntl.h>
+#include <limits.h>
 
-# define FT_STR_TEST_CASE 7
-# define BUFFER_SIZE 2048
+#define FT_STR_TEST_CASE 7
+#define BUFFER_SIZE 2048
 
 typedef struct s_list
 {
@@ -56,6 +56,12 @@ void	test_ft_list_push_front(void);
 void	test_ft_list_sort(void);
 void	test_ft_list_remove_if(void);
 
+void	print_list(t_list *list, char *test_state, char list_type);
+void	free_list(t_list *list);
+int	cmp_int(void *a, void  *b);
+t_list	*create_list_str(char **strs, int size);
+t_list	*create_list_int(int *array, int size);
+
 #define ATOI_BASE_ASSERT(str, base, expected, test_number) do {                  \
 	fprintf(stdout, "\n-----Testing Case %d-----\n", test_number);               \
 	int	res = ft_atoi_base(str, base);                                           \
@@ -75,5 +81,7 @@ void	test_ft_list_remove_if(void);
 	else                                                                         \
 		fprintf(stdout, "TEST FAILED\n");                                        \
 } while (0)
+
+#define ARRAY_LEN(x) (sizeof(x) / sizeof((x)[0]))
 
 #endif
