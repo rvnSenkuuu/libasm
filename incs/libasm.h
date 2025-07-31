@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:35:40 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/30 15:59:24 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/31 11:03:53 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define LIBASM_H
 
 #include <unistd.h>
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -59,12 +60,14 @@ void	test_ft_list_remove_if(void);
 void	print_list(t_list *list, char *test_state, char list_type);
 void	free_list(t_list *list);
 int	cmp_int(void *a, void  *b);
+int	c_atoi_base(char *str, char *base);
 t_list	*create_list_str(char **strs, int size);
 t_list	*create_list_int(int *array, int size);
 
-#define ATOI_BASE_ASSERT(str, base, expected, test_number) do {                  \
+#define ATOI_BASE_ASSERT(str, base, test_number) do {                            \
 	fprintf(stdout, "\n-----Testing Case %d-----\n", test_number);               \
 	int	res = ft_atoi_base(str, base);                                           \
+	int	expected = c_atoi_base(str, base);                                       \
 	fprintf(stdout, "Result = %d\nExpected = %d\n", res, expected);              \
 	if (res == expected)                                                         \
 		fprintf(stdout, "TEST SUCCESS\n");                                       \

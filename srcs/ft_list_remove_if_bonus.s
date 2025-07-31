@@ -22,25 +22,30 @@ ft_list_remove_if:
 
 .loop:
 	push rdi ; save rdi will overwritten for cmp function call
+	
 	mov rdi, [rdi + s_list.data]
 	mov rsi, r12
-	call r13
+	call r13 ; cmp(current->data, data_ref)
 	pop rdi
-	cmp rax, 0
+
+	test rax, rax ; if cmp return value != 0
 	jne .inc_node
 
 .remove_node:
 	push qword [rdi + s_list.next] ; push current->next to the stack to save it
 	push rdi ; save current node it will be overwritten for free_fct call
 	mov rdi, [rdi + s_list.data] ; put the current->data into rdi for free_fct call
-	call r14
+
+	call r14 ; free_fct(current->data)
 	pop rdi
-	call free
-	cmp r15, 0
+	call free ; free(current)
+	test r15, r15
 	je .head_node
+
 	pop rdi ; pop current->next
 	mov [r15 + s_list.next], rdi ; prev->next = current->next
-	cmp rdi, 0
+
+	test rdi, rdi ; if current == NULL
 	jne .loop
 	jmp .return
 
@@ -54,7 +59,7 @@ ft_list_remove_if:
 	mov rdi, [rdi + s_list.next] ; current = current->next
 
 .loop_end_condition:
-	cmp rdi, 0
+	test rdi, rdi
 	jne .loop
 
 .return:
