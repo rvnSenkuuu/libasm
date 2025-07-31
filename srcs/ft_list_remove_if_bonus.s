@@ -21,6 +21,9 @@ ft_list_remove_if:
 	mov rdi, [rdi] ; put *begin into rdi
 
 .loop:
+	test rdi, rdi ; if current == NULL
+	je .return
+
 	push rdi ; save rdi will overwritten for cmp function call
 	
 	mov rdi, [rdi + s_list.data]
@@ -45,9 +48,7 @@ ft_list_remove_if:
 	pop rdi ; pop current->next
 	mov [r15 + s_list.next], rdi ; prev->next = current->next
 
-	test rdi, rdi ; if current == NULL
-	jne .loop
-	jmp .return
+	jmp .loop
 
 .head_node:
 	pop rdi ; rdi = current->next
