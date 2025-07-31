@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 15:57:42 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/31 11:08:13 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/31 13:57:50 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,15 @@ void	free_list(t_list *list)
 	}
 }
 
-int	cmp_int(void *a, void  *b)
+inline int	cmp_int(void *a, void  *b)
 {
 	if (*(int *)a == *(int *)b) return 0;
 	return 1;
+}
+
+inline int	cmp_int_sort(void *a, void *b)
+{
+	return *(int *)a > *(int *)b;
 }
 
 void	print_list(t_list *list, char *test_state, char list_type)
@@ -73,7 +78,7 @@ void	print_list(t_list *list, char *test_state, char list_type)
 			}
 			break;
 		default:	
-			fprintf(stdout, "unknow type\n");
+			fprintf(stdout, "unknown type\n");
 	}
 
 	write(STDOUT_FILENO, "\n", sizeof(char));

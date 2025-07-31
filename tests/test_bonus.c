@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:38:03 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/31 11:00:27 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/31 14:05:48 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,41 +51,39 @@ void	test_ft_list_push_front(void)
 	fprintf(stdout, "=====FT_LIST_PUSH_FRONT=====\n");
 
 	t_list	*list = NULL;
-	t_list	node, node1, node2, node3;
+	t_list	node1, node2, node3, node4;
 
-	node.data = "aaaaaa";
-	node1.data = "bbbbbbbb";
-	node2.data = "cccccccccc";
-	node3.data = "ddddddddddddd";
-
-	ft_list_push_front(&list, &node);
+	node1.data = "aaaaaa";
+	node2.data = "bbbbbbbb";
+	node3.data = "cccccccccc";
+	node4.data = "ddddddddddddd";
 	ft_list_push_front(&list, &node1);
-	ft_list_push_front(&list, &node3);
 	ft_list_push_front(&list, &node2);
-
-	print_list(list, NULL, 0);
+	ft_list_push_front(&list, &node3);
+	ft_list_push_front(&list, &node4);
+	print_list(list, NULL, 's');
 }
 
 void	test_ft_list_sort(void)
 {
 	fprintf(stdout, "=====FT_LIST_SORT=====\n");
 
-	t_list	*list = NULL;
-	t_list	node, node1, node2, node3;
+	char	*strs[] = {"eeeee", "ddddd", "ccccc", "bbbbb", "aaaaa"};
+	
+	t_list	*list_str = create_list_str(strs, 5);
+	fprintf(stdout, "=====TEST 1=====\n");
+	print_list(list_str, "before", 's');
+	ft_list_sort(&list_str, strcmp);
+	print_list(list_str, "after", 's');
+	free_list(list_str);
 
-	node.data = "aaaaa";
-	node1.data = "bbbbb";
-	node2.data = "ccccc";
-	node3.data = "ddddd";
-
-	ft_list_push_front(&list, &node);
-	ft_list_push_front(&list, &node1);
-	ft_list_push_front(&list, &node2);
-	ft_list_push_front(&list, &node3);
-
-	print_list(list, "before", 's');
-	ft_list_sort(&list, strcmp);
-	print_list(list, "after", 's');
+	int	array[] = {5, 4, 3, 2, 1};
+	t_list	*list_int = create_list_int(array, 5);
+	fprintf(stdout, "=====TEST 2=====\n");
+	print_list(list_int, "before", 'd');
+	ft_list_sort(&list_int, cmp_int_sort);
+	print_list(list_int, "after", 'd');
+	free_list(list_int);
 }
 
 void	test_ft_list_remove_if(void)

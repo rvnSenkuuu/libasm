@@ -6,7 +6,7 @@
 /*   By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:35:40 by tkara2            #+#    #+#             */
-/*   Updated: 2025/07/31 11:03:53 by tkara2           ###   ########.fr       */
+/*   Updated: 2025/07/31 13:56:15 by tkara2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	test_ft_list_remove_if(void);
 void	print_list(t_list *list, char *test_state, char list_type);
 void	free_list(t_list *list);
 int	cmp_int(void *a, void  *b);
+int	cmp_int_sort(void *a, void *b);
 int	c_atoi_base(char *str, char *base);
 t_list	*create_list_str(char **strs, int size);
 t_list	*create_list_int(int *array, int size);

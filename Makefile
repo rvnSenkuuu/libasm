@@ -6,7 +6,7 @@
 #    By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/14 15:29:14 by tkara2            #+#    #+#              #
-#    Updated: 2025/07/31 12:02:30 by tkara2           ###   ########.fr        #
+#    Updated: 2025/07/31 13:57:25 by tkara2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ TEST_DEPS = $(TEST_OBJ:.o=.d)
 
 TEST_NAME = libasm_test
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iincs -MMD -MP
+CFLAGS = -Wall -Werror -Wextra -Iincs -MMD -MP -finline-functions
 
 all: $(NAME)
 
