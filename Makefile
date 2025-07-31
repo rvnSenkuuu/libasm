@@ -6,24 +6,24 @@
 #    By: tkara2 <tkara2@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/14 15:29:14 by tkara2            #+#    #+#              #
-#    Updated: 2025/07/30 15:59:53 by tkara2           ###   ########.fr        #
+#    Updated: 2025/07/31 12:02:30 by tkara2           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = srcs/ft_strlen.s \
-		srcs/ft_strcmp.s \
-		srcs/ft_strcpy.s \
-		srcs/ft_strdup.s \
-		srcs/ft_write.s \
-		srcs/ft_read.s \
-		srcs/ft_atoi_base_bonus.s \
-		srcs/ft_list_size_bonus.s \
-		srcs/ft_list_push_front_bonus.s \
-		srcs/ft_list_sort_bonus.s \
-		srcs/ft_list_remove_if_bonus.s
+	   srcs/ft_strcmp.s \
+	   srcs/ft_strcpy.s \
+	   srcs/ft_strdup.s \
+	   srcs/ft_write.s \
+	   srcs/ft_read.s \
+	   srcs/ft_atoi_base_bonus.s \
+	   srcs/ft_list_size_bonus.s \
+	   srcs/ft_list_push_front_bonus.s \
+	   srcs/ft_list_sort_bonus.s \
+	   srcs/ft_list_remove_if_bonus.s
 
 OBJSDIR = .objs
-OBJS = $(patsubst %.s,$(OBJSDIR)/%.o,$(SRCS))
+OBJS = $(SRCS:%.s=$(OBJSDIR)/%.o)
 
 INCS = ./incs/libasm.h
 
@@ -33,27 +33,29 @@ NASM_FLAGS = -felf64 -I incs/
 AR = ar rcs
 RM = rm -rf
 
-TEST_FILE = srcs/main.c \
-			srcs/test_mandatory.c \
-			srcs/test_bonus.c \
-			srcs/test_utils.c
+TEST_FILES = tests/main.c \
+			tests/test_mandatory.c \
+			tests/test_bonus.c \
+			tests/test_utils.c
 
-TEST_OBJ = $(addprefix $(OBJSDIR)/,$(TEST_FILE:.c=.o))
+TEST_OBJ = $(TEST_FILES:%.c=$(OBJSDIR)/%.o)
+TEST_DEPS = $(TEST_OBJ:.o=.d)
 
 TEST_NAME = libasm_test
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iincs -MMD -MP -g3
+CFLAGS = -Wall -Werror -Wextra -Iincs -MMD -MP
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
-$(OBJSDIR)/%.o:	%.s
+$(OBJSDIR)/%.o: %.s
 	mkdir -p $(@D)
 	$(NASM) $(NASM_FLAGS) -o $@ $<
 
 $(OBJSDIR)/%.o: %.c
+	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: all
@@ -73,6 +75,6 @@ fclean: clean
 re: fclean
 	$(MAKE) all
 
--include $(OBJS:.o=.d)
+-include $(TEST_DEPS)
 
 .PHONY: all bonus test clean fclean re
