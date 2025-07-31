@@ -53,15 +53,11 @@ ft_list_remove_if:
 .head_node:
 	pop rdi ; rdi = current->next
 	mov [rbx], rdi ; *begin = current->next
-	jmp .loop_end_condition
+	jmp .loop
 
 .inc_node:
 	mov r15, rdi ; prev = current
 	mov rdi, [rdi + s_list.next] ; current = current->next
-
-.loop_end_condition:
-	test rdi, rdi
-	jne .loop
 
 .return:
 	pop r15
